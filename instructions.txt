@@ -1,0 +1,23 @@
+﻿Detta skript kör testet från cambro med givna inställningar och delar upp resultatet till varje test i egna filer samt genererar filer med medelvärdet av körningarna om
+varje test kördes mer än en gång.
+
+
+Kopiera filerna till en mapp nära din kod. (Man kan skippa instruktionerna)
+Fungerar med alla olika tabeller som ska kompileras med det givna testet.
+
+Kör "complete.sh" med bash-skalet.
+Parametrarna är 
+"bash complete.sh {sökvägen till din kompilerade fil} {max antal element att testa med} {antal olika stora elementantal som max antalet delas upp i} {antalet gånger varje test körs (för bättre medelvärde)}"
+
+(exempelvis "bash complete.sh tabletest 20000 10 5" som kör testet från cambro 10*5 gånger med värden (20000/10)*n där nE{1,2,3,4,5,6,7,8,9,10})
+
+Testet kan ta en stund (väldigt länge för input som kör många tester nära höga värden) beroende på antal element och tester  
+
+Resultat hamnar i mappen "results/{programnamn}_{testinput}" där programmet utgår från den kompilerade filens mapp.
+"raw.txt" är råa datat, mappen "split" har alla tester sorterat i testnummer, 
+och mappen "splitavg" har alla tester sorterat i testnummer och med medelvärdet av testet för varje elementmängd.
+
+"plotter.m" kopieras automatiskt till resultatet.
+"plotter.m" fungerar med utdatat från skriptet om den ligger i mappen med ditt kompilerade programs namn och visar fyra grafer med olika användbara ansatser. Tar in allt data och kan anpassas på plot-delen som man vill.
+
+De två python skripten fungerar utan .sh skriptet med "skriptet.py {råa resultat}". Skripten kan ta emot flera råa filer ifall att du inte kört alla dina test till samma fil.
