@@ -18,7 +18,7 @@ then
 			b=$(($b-1))
 		done
 	done
-	printf "python3 $SCRIPTPATH/splitfile.py $CWD/$resultfolder/raw.txt && python3 $SCRIPTPATH/splitandavg.py  $CWD/$resultfolder/raw.txt" >> $resultfolder/runandsplit.sh
+	printf "python3 $SCRIPTPATH/splitfile.py $PWD/$resultfolder/raw.txt && python3 $SCRIPTPATH/splitandavg.py  $PWD/$resultfolder/raw.txt" >> $resultfolder/runandsplit.sh
 	/bin/bash $resultfolder/runandsplit.sh
 	rm $resultfolder/runandsplit.sh
 	cp $SCRIPTPATH/plotter.m $resultfolder/
