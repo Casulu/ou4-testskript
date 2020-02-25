@@ -1,28 +1,29 @@
 #!/bin/bash
 if [ $# -eq 4 ]
 then
+    SCRIPTPATH="$( cd  "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 	echo -e "Running script for testing $2 element values split into $3,  $4 times\n"
-	printf "#!/bin/bash\n" >> runandsplit.sh
-	resultfolder=results/$1_$2_$3_$4
+	resultfolder=$1_$2_$3_$4
 	mkdir -p $resultfolder
-	printf "$2, $3, $4" >> ./$resultfolder/input.txt
+	printf "#!/bin/bash\n" >> $resultfolder/runandsplit.sh
+	printf "$1, $2, $3, $4" >> $resultfolder/input.txt
 	b=$(($3*$4))
-	for ((i=1;i<=$3;i++))
+	for ((j=1;j<=$4;j++))
 	do
-		for ((j=1;j<=$4;j++))
-		do	
+		for ((i=1;i<=$3;i++))
+		do
 			a=$(($2/$3))
-			a=$(($a*$i)) 
-			printf "echo $b tests left. && ./$1 -n -t $a >> ./$resultfolder/raw.txt && " >> runandsplit.sh
+			a=$(($a*$i))
+			printf "echo $b tests left. Testing n=$a && ./$1 -n -t $a >> ./$resultfolder/raw.txt && " >> $resultfolder/runandsplit.sh
 			b=$(($b-1))
 		done
 	done
-	printf "python3 splitfile.py ./$resultfolder/raw.txt && python3 splitandavg.py ./$resultfolder/raw.txt" >> runandsplit.sh
-	/bin/bash runandsplit.sh
-	rm runandsplit.sh
-	cp plotter.m $resultfolder/
+	printf "python3 $SCRIPTPATH/splitfile.py $CWD/$resultfolder/raw.txt && python3 $SCRIPTPATH/splitandavg.py  $CWD/$resultfolder/raw.txt" >> $resultfolder/runandsplit.sh
+	/bin/bash $resultfolder/runandsplit.sh
+	rm $resultfolder/runandsplit.sh
+	cp $SCRIPTPATH/plotter.m $resultfolder/
 	echo "Done!"
-else 
+else
 	echo -e "Usage: ./complete.sh {test executable location} {max elements} {element split amount} {runs per test}\n"
 fi
 

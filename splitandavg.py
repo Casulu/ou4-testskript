@@ -1,9 +1,9 @@
 import sys
 import os
 
-if len(sys.argv) != 2:
-	print("Usage(without brackets): python sortfiles.py {your results}\n", "Make sure to print ALL results to ONE file")
-	sys.exit()
+if len(sys.argv) < 2:
+    print("Usage(without brackets): python sortfiles.py {your results} (can take several results)\n")
+    sys.exit()
 
 readfiles = []
 
@@ -33,7 +33,7 @@ for test in tests:
 
 
 k = sys.argv[1].rfind('/')
-if k != -1 and sys.argv[1][0:2] != "./":
+if k != -1:
     resultfolder = sys.argv[1][:k]
 else:
     resultfolder = "results"

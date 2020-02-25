@@ -1,5 +1,4 @@
 clear all;
-close all;
 g = @(n) n; %Predicted g(n) for Insertion
 h = @(n) n; %Predicted g(n) for Removing
 i = @(n) n; %Predicted g(n) for Worst case lookup
@@ -10,16 +9,17 @@ orderpreds = {1,2,3,4,5; g, h, i, j, k};
 
 scriptinput = importdata("input.txt");
 
-tests = zeros(scriptinput(2)*scriptinput(3), 2, 5);
-avgs = zeros(scriptinput(2), 2, 5);
+tests = zeros(scriptinput.data(2)*scriptinput.data(3), 2, 5);
+avgs = zeros(scriptinput.data(2), 2, 5);
 
+%Read data
 for i = 1:5
    tests(:, :, i) = importdata(strcat("split/t", num2str(i), "split.txt"));
    avgs(:, :, i) = importdata(strcat("splitavg/t", num2str(i), "avg.txt"));
 end
 
-%Plot avg data from tests.
-figure
+%Plot data per subtest with the average of each element amount teste. This result in the time complexity for each subtest.
+figure('name',string(scriptinput.textdata))
 hold on
 for i= 1:5
     plot(avgs(:, 1, i), avgs(:, 2, i)); 
@@ -30,11 +30,10 @@ ylabel("Time in ms")
 legend("Insert test", "Remove all test", "Non-existent lookup test", "Random lookup test", "Skewed lookup test", 'Location', 'northwest')
 hold off
 
-figure
-hold on
 
-%Plot avg data from tests divided by amount of elements tested to obtain
-%the complexity of the tables operations.
+%Plot data per subtest divided with the element amount with the average of each element amount tested. This result in the time complexity for each the relevant table operation for each subtest.
+figure('name',string(scriptinput.textdata))
+hold on
 for i = 1:5
     plot(avgs(:, 1, i), avgs(:, 2, i) ./ avgs(:, 1, i)); 
 end
@@ -44,7 +43,8 @@ ylabel("Time in ms")
 legend("Insert test", "Remove all test", "Non-existent lookup test", "Random lookup test", "Skewed lookup test", 'Location', 'northwest')
 hold off
 
-figure
+%Plot the previous graph divided by a prediction (g(n)) set at the top of the code.
+figure('name',string(scriptinput.textdata))
 hold on
 for i = 1:5
     t = orderpreds(i);
@@ -56,7 +56,8 @@ ylabel("Time in ms / g(n)")
 legend("Insert test", "Remove all test", "Non-existent lookup test", "Random lookup test", "Skewed lookup test", 'Location', 'northwestoutside')
 hold off
 
-figure
+%Plots all runs for each subtest in the same graph. Produces a graph similar to the one from the complexity lecture.
+figure('name',string(scriptinput.textdata))
 hold on
 for i = 1:5
     plot(tests(:, 1, i), tests(:, 2, i) ./ tests(:, 1, i), 'x'); 
