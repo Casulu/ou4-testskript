@@ -21,6 +21,7 @@ Resultat hamnar i mappen "{programnamn}_{testinput}" där roten är mappen du k�
 och mappen "splitavg" har alla tester sorterat i testnummer och med medelvärdet av testet för varje elementmängd.
 
 "plotter.m" kopieras automatiskt till varje körnings resultat.
+I toppen av matlab koden kan man ändra den förutspådda komplexiten för varje operation som används i varje test.
 För att använda plottern öppna matlab och välj ditt resultats mapp som aktiv mapp i matlab och skriv sedan "plotter" i matlabkonsollen.
 
 De två python skripten fungerar utan .sh skriptet med "skriptet.py {råa resultat}". Skripten kan ta emot flera råa filer ifall att du inte kört alla dina test till samma fil.
