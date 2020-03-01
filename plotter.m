@@ -32,7 +32,7 @@ hold off
 
 
 %Plot data per subtest divided with the element amount with the average of each element amount tested. This result in the time complexity for each the relevant table operation for each subtest.
-figure('name',string(scriptinput.textdata))
+figure('name',scriptinput.textdata{1})
 hold on
 for i = 1:5
     plot(avgs(:, 1, i), avgs(:, 2, i) ./ avgs(:, 1, i)); 
@@ -44,7 +44,7 @@ legend("Insert test", "Remove all test", "Non-existent lookup test", "Random loo
 hold off
 
 %Plot the previous graph divided by a prediction (g(n)) set at the top of the code.
-figure('name',string(scriptinput.textdata))
+figure('name',scriptinput.textdata{1})
 hold on
 for i = 1:5
     t = orderpreds(i);
@@ -57,7 +57,7 @@ legend("Insert test", "Remove all test", "Non-existent lookup test", "Random loo
 hold off
 
 %Plots all runs for each subtest in the same graph. Produces a graph similar to the one from the complexity lecture.
-figure('name',string(scriptinput.textdata))
+figure('name',scriptinput.textdata{1})
 hold on
 for i = 1:5
     plot(tests(:, 1, i), tests(:, 2, i) ./ tests(:, 1, i), 'x'); 
