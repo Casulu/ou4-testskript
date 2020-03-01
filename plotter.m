@@ -7,19 +7,19 @@ k = @(n) n; %Predicted g(n) for Skewed lookup
 
 orderpreds = {1,2,3,4,5; g, h, i, j, k};
 
-scriptinput = importdata("input.txt");
+scriptinput = importdata("input.txt", ",");
 
 tests = zeros(scriptinput.data(2)*scriptinput.data(3), 2, 5);
 avgs = zeros(scriptinput.data(2), 2, 5);
 
 %Read data
 for i = 1:5
-   tests(:, :, i) = importdata(strcat("split/t", num2str(i), "split.txt"));
-   avgs(:, :, i) = importdata(strcat("splitavg/t", num2str(i), "avg.txt"));
+    tests(:, :, i) = importdata(strcat("split/t", num2str(i), "split.txt"), ",");
+    avgs(:, :, i) = importdata(strcat("splitavg/t", num2str(i), "avg.txt"), ",");
 end
 
 %Plot data per subtest with the average of each element amount teste. This result in the time complexity for each subtest.
-figure('name',string(scriptinput.textdata))
+figure('name',scriptinput.textdata{1})
 hold on
 for i= 1:5
     plot(avgs(:, 1, i), avgs(:, 2, i)); 
