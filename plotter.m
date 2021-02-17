@@ -18,7 +18,8 @@ for i = 1:5
     avgs(:, :, i) = importdata(strcat("splitavg/t", num2str(i), "avg.txt"), ",");
 end
 
-%Plot data per subtest with the average of each element amount teste. This result in the time complexity for each subtest.
+%Plot data per subtest with the average of each element amount teste. 
+%This result in the time complexity for each subtest.
 figure('name',scriptinput.textdata{1})
 hold on
 for i= 1:5
