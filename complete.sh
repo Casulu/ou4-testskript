@@ -6,7 +6,7 @@ then
 	resultfolder=$1_$2_$3_$4
 	mkdir -p $resultfolder
 	printf "#!/bin/bash\n" > $resultfolder/runandsplit.sh
-	printf "$1, $2, $3, $4" > $resultfolder/input.txt
+	printf "$1, $2, $3, $4" > $resultfolder/meta.txt
     touch ./$resultfolder/raw.txt
 	b=$(($3*$4))
 	for ((j=1;j<=$4;j++))
@@ -19,11 +19,10 @@ then
 			b=$(($b-1))
 		done
 	done
-	printf "python3 $SCRIPTPATH/splitfile.py $PWD/$resultfolder/raw.txt && python3 $SCRIPTPATH/splitandavg.py  $PWD/$resultfolder/raw.txt" >> $resultfolder/runandsplit.sh
 	/bin/bash $resultfolder/runandsplit.sh
 	rm $resultfolder/runandsplit.sh
-	cp $SCRIPTPATH/plotter.m $resultfolder/
-	echo "Done!"
+	echo "Done! Would you like to run the plotter aswell (Y/N)?"
+	
 else
 	echo -e "Usage: pathto/complete.sh {test executable location} {max elements} {element split amount} {runs per test}\n"
 fi
