@@ -83,10 +83,9 @@ def combinePlot(implementations: list[Implementation], figureIndex):
         plt.legend(testTitles)
         f.canvas.set_window_title("Combined plot")
 
-resultsFolder = sys.argv[1]
-arr = Implementation("Array table", open(f'{resultsFolder}/rawarray.txt', 'rb'), [lambda x : x, lambda x : x, lambda x : x, lambda x : x, lambda x : x])
-mtf = Implementation("MTF table", open(f'{resultsFolder}/rawmtf.txt', 'rb'), [lambda x : 1, lambda x : x, lambda x : x, lambda x : x, lambda x : x])
-dlist = Implementation("Dlist table", open(f'{resultsFolder}/rawdlist.txt', 'rb'), [lambda x : 1, lambda x : x, lambda x : x, lambda x : x, lambda x : x])
+arr = Implementation("Array table", open(f'array.txt', 'rb'), [lambda x : x, lambda x : x, lambda x : x, lambda x : x, lambda x : x])
+mtf = Implementation("MTF table", open(f'mtf.txt', 'rb'), [lambda x : 1, lambda x : x, lambda x : x, lambda x : x, lambda x : x])
+dlist = Implementation("Dlist table", open(f'dlist.txt', 'rb'), [lambda x : 1, lambda x : x, lambda x : x, lambda x : x, lambda x : x])
 
 plotTimeFunction([dlist, mtf, arr], 0)
 plotPredictions([dlist, mtf, arr], 5)

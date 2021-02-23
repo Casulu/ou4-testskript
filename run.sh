@@ -1,60 +1,26 @@
 #!/bin/bash
-if [ $# -eq 3 ]
+if [ $# -eq 5 ]
 then
     SCRIPTPATH="$( cd  "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-	echo -e "Running script for testing $1 element values split into $2,  $3 times\n"
-	resultfolder="results_$1_$2_$3"
-	mkdir -p $resultfolder
-	printf "#!/bin/bash\n" > $resultfolder/runandsplit.sh
-    touch ./$resultfolder/rawdlist.txt
-	b=$(($2*$3))
-	for ((j=1;j<=$3;j++))
+	echo -e "Running script for testing $2 element values split into $3,  $4 times\n"
+	printf "#!/bin/bash\n" > runandsplit$1.sh
+    touch ./$5
+	b=$(($3*$4))
+	for ((j=1;j<=$4;j++))
 	do
-		for ((i=1;i<=$2;i++))
+		for ((i=1;i<=$3;i++))
 		do
-			a=$(($1/$2))
+			a=$(($2/$3))
 			a=$(($a*$i))
-			printf "echo $b tests left. Testing n=$a && ./dlist_test -n -t $a >> ./$resultfolder/rawdlist.txt && " >> $resultfolder/runandsplit.sh
+			printf "echo $b tests left. Testing n=$a && $1 -n -t $a >> ./$5 && " >> runandsplit$1.sh
 			b=$(($b-1))
 		done
 	done
-	printf "echo Done testing dlist table" >> $resultfolder/runandsplit.sh
-	/bin/bash $resultfolder/runandsplit.sh
-	rm $resultfolder/runandsplit.sh
-	printf "#!/bin/bash\n" > $resultfolder/runandsplit.sh
-    touch ./$resultfolder/rawmtf.txt
-	b=$(($2*$3))
-	for ((j=1;j<=$3;j++))
-	do
-		for ((i=1;i<=$2;i++))
-		do
-			a=$(($1/$2))
-			a=$(($a*$i))
-			printf "echo $b tests left. Testing n=$a && ./mtf_test -n -t $a >> ./$resultfolder/rawmtf.txt && " >> $resultfolder/runandsplit.sh
-			b=$(($b-1))
-		done
-	done
-	printf "echo Done testing dlist table" >> $resultfolder/runandsplit.sh
-	/bin/bash $resultfolder/runandsplit.sh
-	rm $resultfolder/runandsplit.sh
-	printf "#!/bin/bash\n" > $resultfolder/runandsplit.sh
-    touch ./$resultfolder/rawarray.txt
-	b=$(($2*$3))
-	for ((j=1;j<=$3;j++))
-	do
-		for ((i=1;i<=$2;i++))
-		do
-			a=$(($1/$2))
-			a=$(($a*$i))
-			printf "echo $b tests left. Testing n=$a && ./array_test -n -t $a >> ./$resultfolder/rawarray.txt && " >> $resultfolder/runandsplit.sh
-			b=$(($b-1))
-		done
-	done
-	printf "echo Done testing dlist table" >> $resultfolder/runandsplit.sh
-	/bin/bash $resultfolder/runandsplit.sh
-	rm $resultfolder/runandsplit.sh
+	printf "echo Done testing" >> runandsplit$1.sh
+	/bin/bash runandsplit$1.sh
+	rm runandsplit$1.sh
 else
-	echo -e "Usage: pathto/complete.sh {max elements} {element split amount} {runs per test}\n"
+	echo -e "Usage: pathto/complete.sh {path to the compiled test} {max elements} {element split amount} {runs per test} {output name}\n"
 fi
 
 
