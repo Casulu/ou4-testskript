@@ -12,7 +12,7 @@ then
 		do
 			a=$(($2/$3))
 			a=$(($a*$i))
-			printf "echo $b tests left. Testing n=$a && $1 -n -t $a >> ./$5 && " >> runandsplit$1.sh
+			printf "echo $b tests left. Testing n=$a && ./$1 -n -t $a >> ./$5 && " >> runandsplit$1.sh
 			b=$(($b-1))
 		done
 	done
