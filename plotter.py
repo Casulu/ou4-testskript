@@ -5,7 +5,7 @@ import numpy as np
 testTitles =  ["Insert test", "Remove all test", "Non-existent lookup test", "Random lookup test", "Skewed lookup test"]
 class Implementation:
 
-    def __init__(self, title: str, testData, predictions):
+    def __init__(self, title, testData, predictions):
         self.predictions = predictions
         self.title = title
         loadedFile = np.loadtxt(testData, delimiter=",")
@@ -21,8 +21,8 @@ class Implementation:
                 self.avgData[j, 0] = amount
                 j = j + 1
 
-def plotTimeFunction(implementations: list[Implementation], figureIndex): 
-    titles: list[str] = []
+def plotTimeFunction(implementations, figureIndex): 
+    titles = []
     for imp in implementations:
         titles.append(imp.title)
 
@@ -36,8 +36,8 @@ def plotTimeFunction(implementations: list[Implementation], figureIndex):
         plt.legend(titles)
         f.canvas.set_window_title("Time function")
 
-def plotPredictions(implementations: list[Implementation], figureIndex):
-    titles: list[str] = []
+def plotPredictions(implementations, figureIndex):
+    titles = []
     for imp in implementations:
         titles.append(imp.title)
 
@@ -52,8 +52,8 @@ def plotPredictions(implementations: list[Implementation], figureIndex):
         plt.legend(titles)
         f.canvas.set_window_title("Prediction")
 
-def plotRaw(implementations: list[Implementation], figureIndex):
-    titles: list[str] = []
+def plotRaw(implementations, figureIndex):
+    titles = []
     for imp in implementations:
         titles.append(imp.title)
 
@@ -68,8 +68,8 @@ def plotRaw(implementations: list[Implementation], figureIndex):
         plt.legend(titles)
         f.canvas.set_window_title("Scatter plot")
 
-def combinePlot(implementations: list[Implementation], figureIndex):
-    titles: list[str] = []
+def combinePlot(implementations, figureIndex):
+    titles = []
     for imp in implementations:
         titles.append(imp.title)
 
